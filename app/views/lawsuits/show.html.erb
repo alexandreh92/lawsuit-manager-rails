@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Forum:</strong>
+  <%= @lawsuit.forum %>
+</p>
+
+<p>
+  <strong>Lawyer:</strong>
+  <%= @lawsuit.lawyer %>
+</p>
+
+<p>
+  <strong>Fees:</strong>
+  <%= @lawsuit.fees %>
+</p>
+
+<p>
+  <strong>Autos:</strong>
+  <%= @lawsuit.autos %>
+</p>
+
+<p>
+  <strong>Conciliation date:</strong>
+  <%= @lawsuit.conciliation_date %>
+</p>
+
+<p>
+  <strong>Instruction date:</strong>
+  <%= @lawsuit.instruction_date %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @lawsuit.actives.name %>
+</p>
+
+<p>
+  <strong>Passive:</strong>
+  <%= @lawsuit.passives.name %>
+</p>
+
+<%= link_to 'Edit', edit_lawsuit_path(@lawsuit) %> |
+<%= link_to 'Back', lawsuits_path %>

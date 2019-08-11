@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Teste</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+  <div class="ui grid">
+    <div class="one wide column">
+      <div class="ui left vertical inverted sidebar labeled icon menu visible">
+        <%= link_to root_path, class:"item" do %>
+        <i class="home icon"></i>
+        Home
+        <% end %>
+        <%= link_to contacts_path, class:"item" do %>
+        <i class="block layout icon"></i>
+        Pessoas
+        <% end %>
+        <%= link_to lawsuits_path, class:"item" do %>
+        <i class="smile icon"></i>
+        Ações
+        <% end %>
+      </div>
+    </div>
+    <div class="ui container pusher">
+      <%= yield %>
+    </div>
+  </div>
+
+</body>
+
+</html>

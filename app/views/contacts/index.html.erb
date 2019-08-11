@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Contacts</h1>
+
+<table id="contacts-datatable" class="ui celled striped table dataTable" data-source="<%= contacts_path(format: :json) %>">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>Cidade</th>
+      <th>UF</th>
+      <th>Telefones</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contact', new_contact_path %>

@@ -1,0 +1,202 @@
+<div class="ui container">
+<%= form_for @contact, html: {class: "ui form"} do |f| %>
+
+<% if @contact.errors.any? %>
+<div class="ui message">
+  <div class="header">
+    <%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:
+  </div>
+  <ul class="list">
+    <% @contact.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="ui search">
+    <div class="ui icon input">
+      <input class="prompt" type="text" placeholder="Search countries...">
+      <i class="search icon"></i>
+    </div>
+    <div class="results"></div>
+  </div>
+<div class="field">
+<%= link_to  "text", autocomplete_contacts_path, class:"class" %>
+</div>
+
+<div class="field">
+  <%= f.label :name %>
+  <div class="two fields">
+    <div class="field">
+      <%= f.text_field :name, placeholder:"Nome" %>
+    </div>
+    <div class="field">
+      <%= f.text_field :lastname, placeholder:"Sobrenome" %>
+    </div>
+  </div>
+</div>
+
+<div class="field">
+  <label>Informações</label>
+  <div class="five fields">
+    <div class="field">
+      <%= f.text_field :cpf, placeholder:"CPF" %>
+    </div>
+    <div class="field">
+      <%= f.text_field :rg, placeholder:"RG" %>
+    </div>
+    <div class="field">
+      <%= f.text_field :birthdate, placeholder:"Data de Nascimento" %>
+    </div>
+    <div class="field">
+      <%= f.collection_select(:profession_id, @profession_options_for_select, :id, :description, options = {}, html_options = { class:"ui dropdown"})  %>
+    </div>
+    <div class="field">
+      <%= f.collection_select(:marital_status_id, @marital_options_for_select, :id, :description, options = {}, html_options = { class:"ui dropdown"}) %>
+    </div>
+  </div>
+</div>
+
+<div class="field">
+  <label>Endereço</label>
+  <div class="fields">
+    <div class="two wide field">
+      <%= f.text_field :zipcode, placeholder:"CEP" %>
+    </div>
+    <div class="six wide field">
+      <%= f.text_field :address, placeholder:"Rua" %>
+    </div>
+    <div class="two wide field">
+      <%= f.text_field :number, placeholder:"Número" %>
+    </div>
+    <div class="two wide field">
+      <%= f.text_field :district, placeholder:"Bairro" %>
+    </div>
+    <div class="three wide field">
+      <%= f.text_field :city, placeholder:"Cidade", readonly: "true" %>
+    </div>
+    <div class="one wide field">
+      <%= f.text_field :state, placeholder:"UF", readonly: "true" %>
+    </div>
+  </div>
+</div>
+
+<div class="field">
+    <label>Telefones</label>
+    <div id="phones">
+        <%= f.fields_for :phones do |phones_fields| %>
+        <%= render partial: "phone_fields", locals: { f: phones_fields } %>
+        <% end %>
+      </div>
+  </div>
+
+
+<div class="field">
+  <%= link_to_add_association f, :phones, class:"ui right labeled icon button" do %>
+  Adicionar Telefone
+  <i class="right plus icon"></i>
+  <% end %>
+  
+</div>
+<div class="actions ui centered padded grid" style="padding-top: 30px">
+  <%= button_tag type: 'submit', class: "ui right labeled icon button" do %>
+  Salvar
+        <i class="check icon" aria-hidden="true"></i>
+    <% end %>
+</div>
+<% end %>
+</div>
+<script type="text/javascript">
+
+  $(document).ready(function () {
+
+    function clear_form() {
+      $("#contact_address").val("");
+      $("#contact_district").val("");
+      $("#contact_city").val("");
+      $("#contact_state").val("");
+    }
+
+    $("#contact_zipcode").blur(function () {
+
+      var cep = $(this).val().replace(/\D/g, '');
+
+      if (cep != "") {
+
+        var validacep = /^[0-9]{8}$/;
+
+        if (validacep.test(cep)) {
+
+          $("#contact_address").val("...");
+          $("#contact_district").val("...");
+          $("#contact_city").val("...");
+          $("#contact_state").val("...");
+
+          $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+            if (!("erro" in dados)) {
+              $("#contact_address").val(dados.logradouro);
+              $("#contact_district").val(dados.bairro);
+              $("#contact_city").val(dados.localidade);
+              $("#contact_state").val(dados.uf);
+            }
+            else {
+              clear_form();
+              alert("CEP não encontrado.");
+            }
+          });
+        }
+        else {
+          clear_form();
+          alert("Formato de CEP inválido.");
+        }
+      }
+      else {
+        clear_form();
+      }
+    });
+  });
+  
+  $('.ui.search')
+  .search({
+    type          : 'category',
+    minCharacters : 3,
+    apiSettings   : {
+      onResponse: function(githubResponse) {
+        var
+          response = {
+            results : {}
+          }
+        ;
+        // translate GitHub API response to work with search
+        $.each(githubResponse.contacts, function(index, item) {
+          var
+            language   = item.language || 'Nome',
+            maxResults = 8
+          ;
+          if(index >= maxResults) {
+            return false;
+          }
+          // create new language category
+          if(response.results[language] === undefined) {
+            response.results[language] = {
+              name    : language,
+              results : []
+            };
+          }
+          // add result to category
+          response.results[language].results.push({
+            title       : item.name,
+            description : item.description,
+            url         : item.html_url
+          });
+        });
+        return response;
+      },
+      url: '/contacts/autocomplete.json?query={query}'
+    }
+  })
+  
+
+</script>

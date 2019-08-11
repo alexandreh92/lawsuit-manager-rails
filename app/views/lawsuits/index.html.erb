@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Lawsuits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Forum</th>
+      <th>Lawyer</th>
+      <th>Fees</th>
+      <th>Autos</th>
+      <th>Conciliation date</th>
+      <th>Instruction date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lawsuits.each do |lawsuit| %>
+      <tr>
+        <td><%= lawsuit.forum %></td>
+        <td><%= lawsuit.lawyer %></td>
+        <td><%= lawsuit.fees %></td>
+        <td><%= lawsuit.autos %></td>
+        <td><%= lawsuit.conciliation_date %></td>
+        <td><%= lawsuit.instruction_date %></td>
+        <td><%= link_to 'Show', lawsuit %></td>
+        <td><%= link_to 'Edit', edit_lawsuit_path(lawsuit) %></td>
+        <td><%= link_to 'Destroy', lawsuit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lawsuit', new_lawsuit_path %>

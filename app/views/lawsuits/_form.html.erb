@@ -1,0 +1,97 @@
+<div class="ui container">
+  <%= form_for @lawsuit, html: {class: "ui form"} do |f| %>
+
+  <div class="field">
+    <label>Informações</label>
+    <div class="three fields">
+      <div class="field">
+        <%= f.text_field :autos, placeholder:"Autos Nº" %>
+      </div>
+      <div class="field">
+        <%= f.text_field :forum, placeholder:"Vara" %>
+      </div>
+      <div class="field">
+        <%= f.collection_select(:lawyer_id, @lawyer_options_for_select, :id, :name, options = {}, html_options = { class:"ui dropdown"})  %>
+      </div>
+    </div>
+    <div class="three fields">
+      <div class="field">
+        <%= f.text_field :conciliation_date, placeholder:"Data de Conciliação" %>
+      </div>
+      <div class="field">
+        <%= f.text_field :instruction_date, placeholder:"Data de Instrução" %>
+      </div>
+      <div class="field">
+        <%= f.text_field :fees, placeholder:"Honorários" %>
+      </div>
+    </div>
+    <div class="two fields">
+
+    </div>
+  </div>
+
+
+
+</div>
+
+<div class="centered padded grid">
+
+  <% if @lawsuit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lawsuit.errors.count, "error") %> prohibited this lawsuit from being saved:</h2>
+
+      <ul>
+      <% @lawsuit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :fees %><br>
+    
+  </div>
+
+  <div class="field">
+    
+    
+  </div>
+  <div class="field">
+    <%= f.label :instruction_date %><br>
+    
+  </div>
+  <div class="field">
+    <label>Ativos</label>
+    <div id="actives">
+        <%= f.fields_for :actives do |active_fields| %>
+        <%= render partial: "active_fields", locals: { f: active_fields } %>
+        <% end %>
+      </div>
+  </div>
+  <div class="field">
+    <%= link_to_add_association f, :actives, class:"ui right labeled icon button" do %>
+    Adicionar Ativo
+    <i class="right plus icon"></i>
+    <% end %>
+  </div>
+  <div class="field">
+    <label>Passivos</label>
+    <div id="passives">
+        <%= f.fields_for :passives do |passive_fields| %>
+        <%= render partial: "passive_fields", locals: { f: passive_fields } %>
+        <% end %>
+      </div>
+  </div>
+  <div class="field">
+    <%= link_to_add_association f, :actives, class:"ui right labeled icon button" do %>
+    Adicionar Passivo
+    <i class="right plus icon"></i>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>
