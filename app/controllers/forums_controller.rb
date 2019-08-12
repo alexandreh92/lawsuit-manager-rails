@@ -29,7 +29,7 @@ class ForumsController < ApplicationController
     respond_to do |format|
       if @forum.save
         format.html { redirect_to @forum, notice: 'Forum was successfully created.' }
-        format.json { render :show, status: :created, location: @forum }
+        format.json { render json: @forum }
       else
         format.html { render :new }
         format.json { render json: @forum.errors, status: :unprocessable_entity }

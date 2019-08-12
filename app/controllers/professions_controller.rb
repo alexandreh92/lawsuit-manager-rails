@@ -25,9 +25,17 @@ class ProfessionsController < ApplicationController
   # POST /professions.json
   def create
     @profession = Profession.new(profession_params)
-    if @profession.save
-      render json: @profession
-    end
+
+respond_to do |format|
+  if @profession.save
+    format.html { redirect_to @profession, notice: 'Contact was successfully created.' }
+    format.json { render json: @profession }
+  else
+    format.json {}
+  end
+end
+
+    
   end
 
   # PATCH/PUT /professions/1

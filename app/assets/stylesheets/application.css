@@ -25,3 +25,7 @@
   word-wrap:break-word; 
   overflow-wrap: break-word;
 }
+
+.testef{
+  margin: 0 auto;
+}

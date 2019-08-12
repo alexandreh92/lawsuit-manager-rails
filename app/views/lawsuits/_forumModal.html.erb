@@ -1,0 +1,43 @@
+<div class="ui modal forum-modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Nova Vara
+    </div>
+    <div class="content">
+      <%= form_for Forum.new, html: {class: "ui form"} do |f| %>
+      <% if Forum.new.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@forum.errors.count, "error") %> prohibited this forum from being saved:</h2>
+  
+        <ul>
+          <% Forum.new.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+      <div class="field">
+        <label>Nome da Vara</label>
+        <div class="two fields">
+          <div class="field">
+            <%= f.text_field :name, placeholder:"Nome" %>
+          </div>
+        </div>
+      </div>
+     
+      
+    </div>
+  
+    <div class="actions">
+      <%= f.submit "Salvar", class: "ui button" %>
+      <div id="cancel" class="ui button">Cancelar</div>
+      
+    </div>
+    <% end %>
+  </div>
+  
+  <script>
+      $('#cancel').click(function() {
+        $('.ui.modal.forum-modal').modal('toggle');
+    });
+  </script>

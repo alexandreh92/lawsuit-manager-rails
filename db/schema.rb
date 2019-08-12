@@ -27,12 +27,12 @@ ActiveRecord::Schema.define(version: 20190812030954) do
     t.string   "state"
     t.string   "district"
     t.string   "number"
-    t.integer  "lawyer_id"
+    t.integer  "lawsuit_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
 
-  add_index "contacts", ["lawyer_id"], name: "index_contacts_on_lawyer_id"
+  add_index "contacts", ["lawsuit_id"], name: "index_contacts_on_lawsuit_id"
   add_index "contacts", ["marital_status_id"], name: "index_contacts_on_marital_status_id"
   add_index "contacts", ["profession_id"], name: "index_contacts_on_profession_id"
 

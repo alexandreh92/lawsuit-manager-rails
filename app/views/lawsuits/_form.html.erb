@@ -8,10 +8,10 @@
         <%= f.text_field :autos, placeholder:"Autos Nº" %>
       </div>
       <div class="field">
-        <%= f.text_field :forum_id, placeholder:"Vara" %>
+          <%= f.select(:forum_id, @forum_options_for_select, {}, {class:"selectize-forum", placeholder: "Vara"})  %>
       </div>
       <div class="field">
-        <%= f.select(:lawyer_id, @lawyer_options_for_select, {}, {class:"selectize"})  %>
+        <%= f.select(:lawyer_id, @lawyer_options_for_select, {}, {class:"selectize-generic"})  %>
       </div>
     </div>
     <div class="three fields">
@@ -62,30 +62,13 @@
 <% end %>
 </div>
 
-<div class="ui modal contact-modal">
-  <i class="close icon"></i>
-  <div class="header">
-    Modal Title
-  </div>
-  <div class="image content">
-    <div class="image">
-      An image can appear on left or an icon
-    </div>
-    <div class="description">
-      A description can appear on the right
-    </div>
-  </div>
-  <div class="actions">
-    <div class="ui button">Cancel</div>
-    <div class="ui button">OK</div>
-  </div>
-</div>
+<%= render partial: "forumModal" %>
 
 <script>
     $(document).ready(function(){
       var selectizeCallback = null;
     
-      $('.ui.modal.contact-modal')
+      $('.ui.modal.forum-modal')
       .modal({
         onHidden: function(e){
           if (selectizeCallback != null){
@@ -93,34 +76,38 @@
             selectizeCallback = null;
           }
     
-          $("#new_contact").trigger("reset");
-          $.rails.enableFormElements($("#new_contact"));
+          $("#new_forum").trigger("reset");
+          $.rails.enableFormElements($("#new_forum"));
         }
       });
     
-      $("#new_contact").on("submit", function(e){
+      $("#new_forum").on("submit", function(e){
         e.preventDefault();
         $.ajax({
+          dataType: "json",
           method: "POST",
           url: $(this).attr("action"),
           data: $(this).serialize(),
           success: function(response) {
-            selectizeCallback({value: response.id, text: response.name});
+            console.log(response)
+            selectizeCallback({value: response.forum.id, text: response.forum.name});
             selectizeCallback = null;
     
-            $(".ui.modal.contact-modal").modal('toggle');
+            $(".ui.modal.forum-modal").modal('toggle');
           }
         })
       });
     
-      $(".selectize").selectize({
+      $(".selectize-forum").selectize({
         create: function(input, callback){
           selectizeCallback = callback;
     
-          $(".ui.modal.contact-modal").modal('show');
-          $("#contact_name").val(input);
+          $(".ui.modal.forum-modal").modal('show');
+          $("#forum_name").val(input);
         }
       });
     
+      $(".selectize-generic").selectize();
+
     });
 </script>

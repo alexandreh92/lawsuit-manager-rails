@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# This gem does some CPF/CNPJ magic. It allows you to create, validate and format CPF/CNPJ, even through the command-line
+gem "cpf_cnpj"
+# Faker, a port of Data::Faker from Perl, is used to easily generate fake data: names, addresses, phone numbers, etc.
+gem 'faker', '~> 1.6', '>= 1.6.6'
 gem 'selectize-rails'
 #gem 'responders', '~> 2.0'
 # RABL (Ruby API Builder Language) is a Rails and Padrino ruby templating system for generating JSON, XML, MessagePack, PList and BSON.

@@ -21,8 +21,6 @@ class LawsuitsController < ApplicationController
   # GET /lawsuits/new
   def new
     @lawsuit = Lawsuit.new
-    @lawsuit.actives.build
-    @lawsuit.passives.build
   end
 
   # GET /lawsuits/1/edit
@@ -72,6 +70,7 @@ class LawsuitsController < ApplicationController
 
   def set_options_for_select
     @lawyer_options_for_select = Lawyer.all.collect { |l| [l.name, l.id] }
+    @forum_options_for_select = Forum.all.collect { |f| [f.name, f.id] }
     @actives_options_for_select = Contact.all.collect { |c| [c.name, c.id] }
   end
 

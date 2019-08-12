@@ -168,6 +168,7 @@
         e.preventDefault();
         $.ajax({
           method: "POST",
+          dataType: "json",
           url: $(this).attr("action"),
           data: $(this).serialize(),
           success: function(response) {
