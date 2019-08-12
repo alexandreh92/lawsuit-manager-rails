@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190810012804) do
+ActiveRecord::Schema.define(version: 20190812030954) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name"
@@ -27,11 +27,12 @@ ActiveRecord::Schema.define(version: 20190810012804) do
     t.string   "state"
     t.string   "district"
     t.string   "number"
+    t.integer  "lawyer_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "lawsuit_id"
   end
 
+  add_index "contacts", ["lawyer_id"], name: "index_contacts_on_lawyer_id"
   add_index "contacts", ["marital_status_id"], name: "index_contacts_on_marital_status_id"
   add_index "contacts", ["profession_id"], name: "index_contacts_on_profession_id"
 
@@ -48,16 +49,12 @@ ActiveRecord::Schema.define(version: 20190810012804) do
     t.string   "autos"
     t.string   "conciliation_date"
     t.string   "instruction_date"
-    t.integer  "active_id"
-    t.integer  "passive_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
 
-  add_index "lawsuits", ["active_id"], name: "index_lawsuits_on_active_id"
   add_index "lawsuits", ["forum_id"], name: "index_lawsuits_on_forum_id"
   add_index "lawsuits", ["lawyer_id"], name: "index_lawsuits_on_lawyer_id"
-  add_index "lawsuits", ["passive_id"], name: "index_lawsuits_on_passive_id"
 
   create_table "lawyers", force: :cascade do |t|
     t.string   "name"

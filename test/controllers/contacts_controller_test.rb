@@ -18,7 +18,7 @@ class ContactsControllerTest < ActionController::TestCase
 
   test "should create contact" do
     assert_difference('Contact.count') do
-      post :create, contact: { address: @contact.address, birthdate: @contact.birthdate, city: @contact.city, cpf: @contact.cpf, district: @contact.district, lastname: @contact.lastname, marital_status_id: @contact.marital_status_id, name: @contact.name, number: @contact.number, profession_id: @contact.profession_id, rg: @contact.rg, state: @contact.state, zipcode: @contact.zipcode }
+      post :create, contact: { address: @contact.address, birthdate: @contact.birthdate, city: @contact.city, cpf: @contact.cpf, district: @contact.district, lastname: @contact.lastname, lawyer_id: @contact.lawyer_id, marital_status_id: @contact.marital_status_id, name: @contact.name, number: @contact.number, profession_id: @contact.profession_id, rg: @contact.rg, state: @contact.state, zipcode: @contact.zipcode }
     end
 
     assert_redirected_to contact_path(assigns(:contact))
@@ -35,7 +35,7 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   test "should update contact" do
-    patch :update, id: @contact, contact: { address: @contact.address, birthdate: @contact.birthdate, city: @contact.city, cpf: @contact.cpf, district: @contact.district, lastname: @contact.lastname, marital_status_id: @contact.marital_status_id, name: @contact.name, number: @contact.number, profession_id: @contact.profession_id, rg: @contact.rg, state: @contact.state, zipcode: @contact.zipcode }
+    patch :update, id: @contact, contact: { address: @contact.address, birthdate: @contact.birthdate, city: @contact.city, cpf: @contact.cpf, district: @contact.district, lastname: @contact.lastname, lawyer_id: @contact.lawyer_id, marital_status_id: @contact.marital_status_id, name: @contact.name, number: @contact.number, profession_id: @contact.profession_id, rg: @contact.rg, state: @contact.state, zipcode: @contact.zipcode }
     assert_redirected_to contact_path(assigns(:contact))
   end
 

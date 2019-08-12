@@ -1,17 +1,18 @@
 source 'https://rubygems.org'
 
-gem 'responders', '~> 2.0'
-#RABL (Ruby API Builder Language) is a Rails and Padrino ruby templating system for generating JSON, XML, MessagePack, PList and BSON.
-gem 'rabl-rails'
+gem 'selectize-rails'
+#gem 'responders', '~> 2.0'
+# RABL (Ruby API Builder Language) is a Rails and Padrino ruby templating system for generating JSON, XML, MessagePack, PList and BSON.
+#gem 'rabl-rails'
 # Also add either `oj` or `yajl-ruby` as the JSON parser
-gem 'oj'
-#Jquery datatables assets pipeline :: sprockets
+#gem 'oj'
+# Jquery datatables assets pipeline :: sprockets
 gem 'jquery-datatables'
-#DataTables is a nifty jQuery plugin that adds the ability to paginate, sort, and search your html tables
+# DataTables is a nifty jQuery plugin that adds the ability to paginate, sort, and search your html tables
 gem 'ajax-datatables-rails'
-#Semantic empowers designers and developers by creating a shared vocabulary for UI.
+# Semantic empowers designers and developers by creating a shared vocabulary for UI.
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
-#Centralization of locale data collection for Ruby on Rails.
+# Centralization of locale data collection for Ruby on Rails.
 gem 'rails-i18n', '~> 4.0'
 # Dynamic nested forms using jQuery made easy; works with formtastic, simple_form or default forms
 gem 'cocoon'
@@ -30,8 +31,6 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.

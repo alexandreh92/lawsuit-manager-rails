@@ -7,8 +7,6 @@ class CreateLawsuits < ActiveRecord::Migration
       t.string :autos
       t.string :conciliation_date
       t.string :instruction_date
-      t.references :active, index: true, foreign_key: true
-      t.references :passive, index: true, foreign_key: true
 
       t.timestamps null: false
     end

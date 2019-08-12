@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require cocoon
 //= require semantic-ui
+//= require selectize
 //= require_tree .

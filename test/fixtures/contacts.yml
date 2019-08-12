@@ -14,6 +14,7 @@ one:
   state: MyString
   district: MyString
   number: MyString
+  lawyer_id: 
 
 two:
   name: MyString
@@ -29,3 +30,4 @@ two:
   state: MyString
   district: MyString
   number: MyString
+  lawyer_id: 

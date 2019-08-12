@@ -1,0 +1,43 @@
+<div class="ui modal profession-modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Nova Profissão
+  </div>
+  <div class="content">
+    <%= form_for Profession.new, html: {class: "ui form"} do |f| %>
+    <% if Profession.new.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profession.errors.count, "error") %> prohibited this profession from being saved:</h2>
+
+      <ul>
+        <% Profession.new.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <div class="field">
+      <label>Nome da Profissão</label>
+      <div class="two fields">
+        <div class="field">
+          <%= f.text_field :description, placeholder:"Nome" %>
+        </div>
+      </div>
+    </div>
+    <%= f.submit class: "ui button" %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    
+    <div id="cancel" class="ui button">Cancelar</div>
+    
+  </div>
+  
+</div>
+
+<script>
+    $('#cancel').click(function() {
+      $('.ui.modal.profession-modal').modal('toggle');
+  });
+</script>

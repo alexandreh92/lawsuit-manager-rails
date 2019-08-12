@@ -8,6 +8,10 @@ class LawsuitsController < ApplicationController
   # GET /lawsuits.json
   def index
     @lawsuits = Lawsuit.all
+    respond_to do |format|
+      format.html
+      format.json { render json: LawsuitDatatable.new(params) }
+    end
   end
 
   # GET /lawsuits/1
@@ -27,7 +31,6 @@ class LawsuitsController < ApplicationController
   # POST /lawsuits
   # POST /lawsuits.json
   def create  
-    
     @lawsuit = Lawsuit.new(lawsuit_params)
 
     respond_to do |format|
@@ -68,7 +71,8 @@ class LawsuitsController < ApplicationController
   private
 
   def set_options_for_select
-    @lawyer_options_for_select = Lawyer.all
+    @lawyer_options_for_select = Lawyer.all.collect { |l| [l.name, l.id] }
+    @actives_options_for_select = Contact.all.collect { |c| [c.name, c.id] }
   end
 
   # Use callbacks to share common setup or constraints between actions.

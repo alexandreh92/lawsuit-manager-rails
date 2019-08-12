@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ContactsController < ApplicationController
-  respond_to :html, :json, :xml
   before_action :set_contact, only: %i[show edit update destroy]
   before_action :set_options_for_select, only: %i[new edit update create]
 
@@ -23,6 +22,7 @@ class ContactsController < ApplicationController
   def new
     @contact = Contact.new
     @contact.phones.build
+    
   end
 
   # GET /contacts/1/edit
@@ -36,7 +36,7 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.save
         format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
-        format.json { render :show, status: :created, location: @contact }
+        format.json { render @contact }
       else
         format.html { render :new }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
@@ -58,11 +58,6 @@ class ContactsController < ApplicationController
     end
   end
 
-  def autocomplete    
-    @contacts = Contact.order(:name).where('name like ?', "%#{params[:query]}%")
-    respond_with(@contacts)
-  end
-
   # DELETE /contacts/1
   # DELETE /contacts/1.json
   def destroy
@@ -76,8 +71,8 @@ class ContactsController < ApplicationController
   private
 
   def set_options_for_select
-    @profession_options_for_select = Profession.all
-    @marital_options_for_select = MaritalStatus.all
+    @profession_options_for_select = Profession.all.collect { |c| [c.description, c.id] }
+    @marital_options_for_select = MaritalStatus.all.collect { |m| [m.description, m.id] }
   end
 
   # Use callbacks to share common setup or constraints between actions.

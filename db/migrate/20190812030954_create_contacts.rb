@@ -14,6 +14,7 @@ class CreateContacts < ActiveRecord::Migration
       t.string :state
       t.string :district
       t.string :number
+      t.references :lawyer, index: true, foreign_key: true
 
       t.timestamps null: false
     end

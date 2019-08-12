@@ -92,3 +92,25 @@ jQuery(document).ready(function() {
     // available options.
   });
 });
+
+jQuery(document).ready(function() {
+  $('#lawsuits-datatable').dataTable({
+    "processing": true,
+    "serverSide": true,
+    "ajax": {
+      "url": $('#lawsuits-datatable').data('source')
+    },
+    "pagingType": "full_numbers",
+    "columns": [
+      {"data": "autos"},
+      {"data": "forum"},
+      {"data": "lawyer"},
+      {"data": "fees"},
+      {"data": "conciliation_date"},
+      {"data": "instruction_date"}
+    ]
+    // pagingType is optional, if you want full pagination controls.
+    // Check dataTables documentation to learn more about
+    // available options.
+  });
+});

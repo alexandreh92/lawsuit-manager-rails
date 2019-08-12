@@ -25,15 +25,8 @@ class ProfessionsController < ApplicationController
   # POST /professions.json
   def create
     @profession = Profession.new(profession_params)
-
-    respond_to do |format|
-      if @profession.save
-        format.html { redirect_to @profession, notice: 'Profession was successfully created.' }
-        format.json { render :show, status: :created, location: @profession }
-      else
-        format.html { render :new }
-        format.json { render json: @profession.errors, status: :unprocessable_entity }
-      end
+    if @profession.save
+      render json: @profession
     end
   end
 

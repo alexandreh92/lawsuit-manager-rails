@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+
+  
+
+  resources :contacts
   resources :forums
   resources :lawyers
   resources :lawsuits
   resources :professions
   resources :marital_statuses
   resources :phones
-  resources :contacts do
-    get :autocomplete, :on => :collection
-  end
 
   namespace :site do
     get 'home/index'
