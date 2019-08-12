@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Lawsuits</h1>
-
+<h4 class="ui top attached block header">Listing Lawsuits</h1>
+<div class="ui bottom attached segment">
 <table id="lawsuits-datatable" class="ui celled striped table dataTable" data-source="<%= lawsuits_path(format: :json) %>">
   <thead>
     <tr>
@@ -16,6 +16,8 @@
   <tbody>
   </tbody>
 </table>
+</div>
+
 
 <br>
 

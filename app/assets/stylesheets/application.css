@@ -27,5 +27,17 @@
 }
 
 .testef{
-  margin: 0 auto;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
 }
+
+.pastel{
+  position: absolute;
+  right: 10px;
+  display: block;
+  align-items: right;
+}
+
+
