@@ -29,14 +29,8 @@ class LawsuitsController < ApplicationController
 
   # POST /lawsuits
   # POST /lawsuits.json
-  def create  
-    
+  def create
     @lawsuit = Lawsuit.new(lawsuit_params)
-  
-    lawsuit_params[:actives_attributes]["0"].each do |k,w|
-      puts "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF #{w}"
-    end
-
 
     respond_to do |format|
       if @lawsuit.save
@@ -78,8 +72,10 @@ class LawsuitsController < ApplicationController
   def set_options_for_select
     @lawyer_options_for_select = Lawyer.all.collect { |l| [l.name, l.id] }
     @forum_options_for_select = Forum.all.collect { |f| [f.name, f.id] }
-    @actives_options_for_select = Contact.all.pluck(:name, :id)
+    @actives_options_for_select = Contact.all
   end
+
+  
 
   # Use callbacks to share common setup or constraints between actions.
   def set_lawsuit
@@ -89,6 +85,6 @@ class LawsuitsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def lawsuit_params
     params.require(:lawsuit).permit(:forum_id, :lawyer_id, :fees, :autos, :conciliation_date,
-                                    :instruction_date, actives_attributes: [:contact_id => []])
+                                    :instruction_date, actives_attributes: %i[contact_id _destroy])
   end
 end

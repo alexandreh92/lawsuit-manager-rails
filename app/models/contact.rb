@@ -15,4 +15,10 @@ class Contact < ActiveRecord::Base
   has_many :phones
 
   accepts_nested_attributes_for :phones, reject_if: :all_blank, allow_destroy: true
+
+
+  def fullname
+    "#{name} #{lastname}"
+  end
+
 end
