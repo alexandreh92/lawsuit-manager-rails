@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190812030954) do
+ActiveRecord::Schema.define(version: 20190813074145) do
+
+  create_table "actives", force: :cascade do |t|
+    t.integer  "contact_id"
+    t.integer  "lawsuit_id"
+    t.datetime "appointment_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "actives", ["contact_id"], name: "index_actives_on_contact_id"
+  add_index "actives", ["lawsuit_id"], name: "index_actives_on_lawsuit_id"
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name"
@@ -27,12 +38,10 @@ ActiveRecord::Schema.define(version: 20190812030954) do
     t.string   "state"
     t.string   "district"
     t.string   "number"
-    t.integer  "lawsuit_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
 
-  add_index "contacts", ["lawsuit_id"], name: "index_contacts_on_lawsuit_id"
   add_index "contacts", ["marital_status_id"], name: "index_contacts_on_marital_status_id"
   add_index "contacts", ["profession_id"], name: "index_contacts_on_profession_id"
 

@@ -1,7 +1,8 @@
 class Contact < ActiveRecord::Base
   belongs_to :profession
   belongs_to :marital_status
-  belongs_to :lawyer
+  has_many :actives
+  has_many :lawsuits, through: :actives
 
   #Validates
 

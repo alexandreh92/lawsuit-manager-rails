@@ -68,6 +68,10 @@ jQuery(document).ready(function() {
   $('#contacts-datatable').dataTable({
     "processing": true,
     "serverSide": true,
+    "lengthChange": false,
+    "language": { search: "", searchPlaceholder: "Procurar" },
+    "bInfo" : false,
+    "dom": '<"top"if>rt<"bottom"lp><"clear">',
     "ajax": {
       "url": $('#contacts-datatable').data('source')
     },
@@ -97,12 +101,17 @@ jQuery(document).ready(function() {
   $('#lawsuits-datatable').dataTable({
     "processing": true,
     "serverSide": true,
+    "lengthChange": false,
+    "bInfo" : false,
+    "dom": '<"top"if>rt<"bottom"lp><"clear">',
+    "language": { search: "", searchPlaceholder: "Procurar" },
     "ajax": {
       "url": $('#lawsuits-datatable').data('source')
     },
     "pagingType": "full_numbers",
     "columns": [
       {"data": "autos"},
+      {"data": "actives"},
       {"data": "forum"},
       {"data": "lawyer"},
       {"data": "fees"},

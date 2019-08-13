@@ -1,6 +1,6 @@
 <div class="nested-fields fields">
   <div class="twelve wide field">
-    <%= f.text_field :name, placeholder: "Nome" %>
+    <%= f.select :contact_id, Contact.all.pluck(:name,:id), {}, {} %>
   </div>
   
   <%= link_to_remove_association f, class:"ui icon button" do %>

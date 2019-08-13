@@ -30,10 +30,13 @@
   <label>Ativos</label>
   <div class="two fields">
     <div class="field">
-      <%= f.select(:actives, @actives_options_for_select, {}, {multiple: true, class:"selectize", placeholder: "Ativos"})  %>
+        <%= f.fields_for :actives do |ff| %>
+        <%= ff.collection_select(:contact_id, Contact.all, :id, :name, {:include_blank => false},
+        {:multiple => true, :class => 'form-control'}) %>
+      <% end %>
     </div>
     <div class="field">
-      <%= f.select(:passives, @actives_options_for_select, {}, {multiple: true, class:"selectize", placeholder: "Passivos"})  %>
+      
     </div>
   </div>
 </div>
