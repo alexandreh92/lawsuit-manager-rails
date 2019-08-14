@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Rails forms made easy.
+gem 'simple_form'
 # This gem does some CPF/CNPJ magic. It allows you to create, validate and format CPF/CNPJ, even through the command-line
 gem "cpf_cnpj"
 # Faker, a port of Data::Faker from Perl, is used to easily generate fake data: names, addresses, phone numbers, etc.

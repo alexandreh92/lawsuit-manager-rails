@@ -1,8 +1,10 @@
 class Contact < ActiveRecord::Base
+  attr_accessor :active_ids
   belongs_to :profession
   belongs_to :marital_status
   has_many :actives
   has_many :lawsuits, through: :actives
+
 
   #Validates
 

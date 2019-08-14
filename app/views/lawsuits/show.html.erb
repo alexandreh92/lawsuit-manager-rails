@@ -30,15 +30,7 @@
   <%= @lawsuit.instruction_date %>
 </p>
 
-<p>
-  <strong>Active:</strong>
-  <%= @lawsuit.actives.name %>
-</p>
 
-<p>
-  <strong>Passive:</strong>
-  <%= @lawsuit.passives.name %>
-</p>
 
 <%= link_to 'Edit', edit_lawsuit_path(@lawsuit) %> |
 <%= link_to 'Back', lawsuits_path %>

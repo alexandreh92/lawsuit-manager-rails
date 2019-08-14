@@ -24,6 +24,7 @@
           <%= f.text_field :fees, placeholder:"Honorários" %>
         </div>
       </div>
+      <%= f.collection_select :actives, Contact.all, :id, :name, {include_hidden: false}, {multiple: true} %>
       <div class="field">
         <label>Ativos</label>
         <div class="two fields">
