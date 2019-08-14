@@ -24,19 +24,13 @@
           <%= f.text_field :fees, placeholder:"Honorários" %>
         </div>
       </div>
-      <%= f.collection_select :actives, Contact.all, :id, :name, {include_hidden: false}, {multiple: true} %>
+      
       <div class="field">
         <label>Ativos</label>
         <div class="two fields">
           <div class="field">
             <div id="actives">
-              <%= f.fields_for :actives do |active_fields| %>
-                <%= render partial: "active_fields", locals: { f: active_fields } %>
-              <% end %>
-              <%= link_to_add_association f, :actives, class:"ui right labeled icon button" do %>
-                Adicionar Ativo
-                <i class="right plus icon"></i>
-              <% end %>
+              <%= f.collection_select :contact_ids, Contact.all, :id, :name, {include_hidden: false}, {multiple: true, class:"selectize-generic"} %>
             </div>
           </div>
           <div class="field">

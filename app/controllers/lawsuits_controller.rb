@@ -25,7 +25,10 @@ class LawsuitsController < ApplicationController
   end
 
   # GET /lawsuits/1/edit
-  def edit; end
+  def edit
+    @contacts = {}
+    Contact.all.collect { |c| @contacts[c.name] = c.id }
+  end
 
   # POST /lawsuits
   # POST /lawsuits.json
@@ -34,6 +37,7 @@ class LawsuitsController < ApplicationController
 
     respond_to do |format|
       if @lawsuit.save
+        @lawsuit.contacts << Contact.where(id: contact_ids)
         format.html { redirect_to @lawsuit, notice: 'Lawsuit was successfully created.' }
         format.json { render :show, status: :created, location: @lawsuit }
       else
@@ -46,6 +50,7 @@ class LawsuitsController < ApplicationController
   # PATCH/PUT /lawsuits/1
   # PATCH/PUT /lawsuits/1.json
   def update
+    handle_lawsuit_contacts
     respond_to do |format|
       if @lawsuit.update(lawsuit_params)
         format.html { redirect_to @lawsuit, notice: 'Lawsuit was successfully updated.' }
@@ -69,13 +74,25 @@ class LawsuitsController < ApplicationController
 
   private
 
+  def handle_lawsuit_contacts
+    if params[:lawsuit][:contact_ids]
+      @lawsuit.actives.clear
+      actives = params[:lawsuit][:contact_ids]
+      @lawsuit.actives = actives
+    end
+  end
+
   def set_options_for_select
     @lawyer_options_for_select = Lawyer.all.collect { |l| [l.name, l.id] }
     @forum_options_for_select = Forum.all.collect { |f| [f.name, f.id] }
     @actives_options_for_select = Contact.all
   end
 
-  
+  def contact_ids
+    # use this to nested attributes (fields_for)
+    # params[:lawsuit][:actives_attributes].try(:[], '0').try(:[], :contact_id)
+    params[:lawsuit][:contact_ids]
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_lawsuit
@@ -85,6 +102,6 @@ class LawsuitsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def lawsuit_params
     params.require(:lawsuit).permit(:forum_id, :lawyer_id, :fees, :autos, :conciliation_date,
-                                    :instruction_date, actives_attributes: %i[contact_id _destroy])
+                                    :instruction_date)
   end
 end
