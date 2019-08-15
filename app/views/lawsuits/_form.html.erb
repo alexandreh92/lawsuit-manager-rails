@@ -26,14 +26,17 @@
       </div>
       
       <div class="field">
-        <label>Ativos</label>
+        <label>Partes Interessadas</label>
         <div class="two fields">
           <div class="field">
             <div id="actives">
-              <%= f.collection_select :contact_ids, Contact.all, :id, :name, {include_hidden: false}, {multiple: true, class:"selectize-generic"} %>
+              <%= f.collection_select :actives, Contact.all, :id, :name, {include_hidden: false}, {multiple: true, class:"selectize-generic", placeholder: "Ativos"} %>
             </div>
           </div>
           <div class="field">
+              <div id="actives">
+                  <%= f.collection_select :recievers, Contact.all, :id, :name, {include_hidden: false}, {multiple: true, class:"selectize-generic", placeholder: "Passivos"} %>
+                </div>
           </div>
         </div>
       </div>

@@ -37,7 +37,8 @@ class LawsuitsController < ApplicationController
 
     respond_to do |format|
       if @lawsuit.save
-        @lawsuit.contacts << Contact.where(id: contact_ids)
+        handle_actives
+        handle_recievers
         format.html { redirect_to @lawsuit, notice: 'Lawsuit was successfully created.' }
         format.json { render :show, status: :created, location: @lawsuit }
       else
@@ -74,24 +75,28 @@ class LawsuitsController < ApplicationController
 
   private
 
-  def handle_lawsuit_contacts
-    if params[:lawsuit][:contact_ids]
-      @lawsuit.actives.clear
-      actives = params[:lawsuit][:contact_ids]
-      @lawsuit.actives = actives
-    end
-  end
-
   def set_options_for_select
     @lawyer_options_for_select = Lawyer.all.collect { |l| [l.name, l.id] }
     @forum_options_for_select = Forum.all.collect { |f| [f.name, f.id] }
     @actives_options_for_select = Contact.all
   end
 
-  def contact_ids
+  def handle_actives
     # use this to nested attributes (fields_for)
     # params[:lawsuit][:actives_attributes].try(:[], '0').try(:[], :contact_id)
-    params[:lawsuit][:contact_ids]
+    if params[:lawsuit][:actives]
+      params[:lawsuit][:actives].each do |a|
+        @lawsuit.actives << Active.new(contact_id: a, lawsuit_id: @lawsuit[:id])
+      end
+    end
+  end
+
+  def handle_recievers
+    if params[:lawsuit][:recievers]
+      params[:lawsuit][:recievers].each do |a|
+        @lawsuit.recievers << Reciever.new(contact_id: a, lawsuit_id: @lawsuit[:id])
+      end
+    end
   end
 
   # Use callbacks to share common setup or constraints between actions.

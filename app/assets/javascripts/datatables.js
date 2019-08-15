@@ -112,6 +112,7 @@ jQuery(document).ready(function() {
     "columns": [
       {"data": "autos"},
       {"data": "actives"},
+      {"data": "recievers"},
       {"data": "forum"},
       {"data": "lawyer"},
       {"data": "fees"},

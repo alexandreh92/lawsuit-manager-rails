@@ -4,6 +4,8 @@ class Contact < ActiveRecord::Base
   belongs_to :marital_status
   has_many :actives
   has_many :lawsuits, through: :actives
+  has_many :recievers
+  has_many :lawsuits, through: :recievers
 
 
   #Validates
@@ -11,8 +13,6 @@ class Contact < ActiveRecord::Base
   validates :name, presence: true, length: {maximum: 50, minimum:3}
   validates :lastname, presence: true, length: {maximum: 50, minimum:3}
   validates :cpf, presence: true, uniqueness: { case_sensitive: false }, length: {maximum: 50}
-  
-  
 
   has_many :phones
 
@@ -22,5 +22,6 @@ class Contact < ActiveRecord::Base
   def fullname
     "#{name} #{lastname}"
   end
+  
 
 end

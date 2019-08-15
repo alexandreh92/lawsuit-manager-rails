@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190813074145) do
+ActiveRecord::Schema.define(version: 20190814235738) do
 
   create_table "actives", force: :cascade do |t|
     t.integer  "contact_id"
@@ -91,5 +91,16 @@ ActiveRecord::Schema.define(version: 20190813074145) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "recievers", force: :cascade do |t|
+    t.integer  "contact_id"
+    t.integer  "lawsuit_id"
+    t.datetime "appointment_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "recievers", ["contact_id"], name: "index_recievers_on_contact_id"
+  add_index "recievers", ["lawsuit_id"], name: "index_recievers_on_lawsuit_id"
 
 end
