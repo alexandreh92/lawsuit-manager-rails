@@ -51,9 +51,10 @@ class LawsuitsController < ApplicationController
   # PATCH/PUT /lawsuits/1
   # PATCH/PUT /lawsuits/1.json
   def update
-    handle_lawsuit_contacts
     respond_to do |format|
       if @lawsuit.update(lawsuit_params)
+        @lawsuit.actives.where.not(contact_id: active_ids).destroy_all
+        @lawsuit.actives << Active.where(id: active_ids)
         format.html { redirect_to @lawsuit, notice: 'Lawsuit was successfully updated.' }
         format.json { render :show, status: :ok, location: @lawsuit }
       else
@@ -81,19 +82,23 @@ class LawsuitsController < ApplicationController
     @actives_options_for_select = Contact.all
   end
 
+  def active_ids
+    params[:lawsuit][:active_ids]
+  end
+
   def handle_actives
     # use this to nested attributes (fields_for)
     # params[:lawsuit][:actives_attributes].try(:[], '0').try(:[], :contact_id)
-    if params[:lawsuit][:actives]
-      params[:lawsuit][:actives].each do |a|
+    if params[:lawsuit][:active_ids]
+      params[:lawsuit][:active_ids].each do |a|
         @lawsuit.actives << Active.new(contact_id: a, lawsuit_id: @lawsuit[:id])
       end
     end
   end
 
   def handle_recievers
-    if params[:lawsuit][:recievers]
-      params[:lawsuit][:recievers].each do |a|
+    if params[:lawsuit][:reciever_ids]
+      params[:lawsuit][:reciever_ids].each do |a|
         @lawsuit.recievers << Reciever.new(contact_id: a, lawsuit_id: @lawsuit[:id])
       end
     end

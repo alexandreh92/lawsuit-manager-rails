@@ -12,8 +12,8 @@ class LawsuitDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         autos: record.autos,
-        actives: record.actives,
-        recievers: record.recievers,
+        actives: record.actives.collect(&:contact).collect(&:name).join("<br/>").html_safe,
+        recievers: record.recievers.collect(&:contact).collect(&:name).join("<br/>").html_safe,
         forum: record.forum.name,
         lawyer: record.lawyer.name,
         fees: record.fees,
