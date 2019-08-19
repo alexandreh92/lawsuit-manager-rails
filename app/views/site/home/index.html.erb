@@ -1,72 +1,73 @@
-<div class="ui container">
-  <h3>Dashboard</h3>
-  <div class="ui grid">
-    <!-- FIRST COLUMN-->
-    <div class="four wide column">
-      <div class="ui red raised segment">
-        <div class="ui header">
-          <i class="settings icon"></i>
-          <div class="content">
-            <div class="sub header">Sub-header</div>
-            Dividing
-          </div>
+<h3>Dashboard</h3>
+<div class="ui grid">
+  <!-- FIRST COLUMN-->
+  <div class="four wide column">
+    <div class="ui red raised segment">
+      <div class="ui header">
+        <i class="settings icon"></i>
+        <div class="content">
+          <div class="sub header">Sub-header</div>
+          Dividing
         </div>
       </div>
     </div>
-    <!-- SECOND COLUMN-->
-    <div class="four wide column">
-      <div class="ui red raised segment">
-        <div class="ui header">
-          <i class="settings icon"></i>
-          <div class="content">
-            <div class="sub header">Sub-header</div>
-            Dividing
-          </div>
+  </div>
+  <!-- SECOND COLUMN-->
+  <div class="four wide column">
+    <div class="ui red raised segment">
+      <div class="ui header">
+        <i class="settings icon"></i>
+        <div class="content">
+          <div class="sub header">Sub-header</div>
+          Dividing
         </div>
       </div>
     </div>
-    <!-- THIRD COLUMN-->
-    <div class="four wide column">
-      <div class="ui red raised segment">
-        <div class="ui header">
-          <i class="settings icon"></i>
-          <div class="content">
-            <div class="sub header">Sub-header</div>
-            Dividing
-          </div>
+  </div>
+  <!-- THIRD COLUMN-->
+  <div class="four wide column">
+    <div class="ui red raised segment">
+      <div class="ui header">
+        <i class="settings icon"></i>
+        <div class="content">
+          <div class="sub header">Sub-header</div>
+          Dividing
         </div>
       </div>
     </div>
-    <!-- FOURTH COLUMN-->
-    <div class="four wide column">
-      <div class="ui red raised segment">
-        <div class="ui header">
-          <i class="settings icon"></i>
-          <div class="content">
-            <div class="sub header">Sub-header</div>
-            Dividing
-          </div>
+  </div>
+  <!-- FOURTH COLUMN-->
+  <div class="four wide column">
+    <div class="ui red raised segment">
+      <div class="ui header">
+        <i class="settings icon"></i>
+        <div class="content">
+          <div class="sub header">Sub-header</div>
+          Dividing
         </div>
       </div>
     </div>
-    <div class="sixteen wide column">
-      <div class="ui raised segments">
-          <div class="ui segment">
-              <h4>Calendário</h4>
-            </div>
-            <div class="ui segment">
-                <%= month_calendar events: @lawsuits do |date, lawsuits| %>
-                <b><%= date %></b>
+  </div>
+  <div class="sixteen wide column">
+    <div class="ui raised segments">
+      <div class="ui segment">
+        <h4>Calendário</h4>
+      </div>
+      <div class="ui segment">
+        <%= month_calendar events: @lawsuits do |date, lawsuits| %>
+          <b><%= I18n.l(date) %></b>
+          <% lawsuits.each do |lawsuit| %>
+
               
-                <% lawsuits.each do |lawsuit| %>
-                  <div>
-                    <%= lawsuit.autos %>
-                  </div>
-                <% end %>
+              <%= link_to (lawsuit), :class => 'ui label calendar' do %>
+              <i class="calendar alternate outline icon"></i>
+                <%= lawsuit.autos %>
               <% end %>
-            </div>
-            <div class="ui segment">
-            </div>
+
+          <% end %>
+        <% end %>
+      </div>
+      <div class="ui segment">
       </div>
     </div>
   </div>

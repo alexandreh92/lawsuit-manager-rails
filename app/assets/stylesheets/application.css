@@ -41,4 +41,14 @@
   align-items: right;
 }
 
+.ui.container{
+  width: 80% !important;
+}
 
+.ui.label.calendar{
+  margin-bottom: 2px;
+}
+
+.table.table-striped{
+  margin-top: 10px;
+}
