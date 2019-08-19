@@ -5,8 +5,10 @@ class CreateLawsuits < ActiveRecord::Migration
       t.references :lawyer, index: true, foreign_key: true
       t.decimal :fees
       t.string :autos
-      t.string :conciliation_date
-      t.string :instruction_date
+      t.datetime :conciliation_date
+      t.datetime :instruction_date
+      t.datetime :interrogation_date
+
 
       t.timestamps null: false
     end

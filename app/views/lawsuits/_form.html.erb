@@ -1,107 +1,210 @@
 <div class="ui container">
   <%= form_for @lawsuit, html: {class: "ui form"} do |f| %>
-    <div class="field">
-      <label>Informações</label>
-      <div class="three fields">
-        <div class="field">
-          <%= f.text_field :autos, placeholder:"Autos Nº" %>
-        </div>
-        <div class="field">
-          <%= f.select(:forum_id, @forum_options_for_select, {}, {class:"selectize-forum", placeholder: "Vara"})  %>
-        </div>
-        <div class="field">
-          <%= f.select(:lawyer_id, @lawyer_options_for_select, {}, {class:"selectize-generic"})  %>
-        </div>
-      </div>
-      <div class="three fields">
-        <div class="field">
-          <%= f.text_field :conciliation_date, placeholder:"Data de Conciliação" %>
-        </div>
-        <div class="field">
-          <%= f.text_field :instruction_date, placeholder:"Data de Instrução" %>
-        </div>
-        <div class="field">
-          <%= f.text_field :fees, placeholder:"Honorários" %>
-        </div>
-      </div>
-      
+  <div class="field">
+    <label>Informações</label>
+    <div class="four fields">
       <div class="field">
-        <label>Partes Interessadas</label>
-        <div class="two fields">
-          <div class="field">
-            <div id="actives">
-              <%= f.collection_select :active_ids, Contact.all, :id, :name, {include_hidden: false}, {multiple: true, class:"selectize-generic", placeholder: "Ativos"} %>
-            </div>
+        <%= f.text_field :autos, placeholder:"Autos Nº" %>
+      </div>
+      <div class="field">
+        <%= f.select(:forum_id, @forum_options_for_select, {include_blank: true}, {class:"selectize-forum", placeholder: "Vara"})  %>
+      </div>
+      <div class="field">
+        <%= f.select(:lawyer_id, @lawyer_options_for_select, {include_blank: true}, {placeholder: "Advogado", class:"selectize-generic"})  %>
+      </div>
+
+      <div class="ui labeled input field">
+        <label for="amount" class="ui label">R$</label>
+        <%= f.text_field :fees, placeholder:"Honorários" %>
+      </div>
+    </div>
+
+  </div>
+  <div class="field">
+    <label>Audiências</label>
+    <div class="three fields">
+      <div class="field date">
+        <div class="ui calendar" id="conciliation-date">
+          <div class="ui input left icon">
+            <i class="calendar icon"></i>
+            <%= f.text_field :conciliation_date, placeholder:"Data de Conciliação", readonly: true %>
           </div>
-          <div class="field">
-              <div id="actives">
-                  <%= f.collection_select :reciever_ids, Contact.all, :id, :name, {include_hidden: false}, {multiple: true, class:"selectize-generic", placeholder: "Passivos"} %>
-                </div>
+        </div>
+      </div>
+      <div class="field date">
+        <div class="ui calendar" id="instruction-date">
+          <div class="ui input left icon">
+            <i class="calendar icon"></i>
+            <%= f.text_field :instruction_date, placeholder:"Data de Instrução", readonly: true %>
+          </div>
+        </div>
+      </div>
+      <div class="field date">
+        <div class="ui calendar" id="interrogation-date">
+          <div class="ui input left icon">
+            <i class="calendar icon"></i>
+            <%= f.text_field :interrogation_date, placeholder:"Data de Interrogação", readonly: true %>
           </div>
         </div>
       </div>
     </div>
-    <div class="centered padded grid">
-      <% if @lawsuit.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@lawsuit.errors.count, "error") %> prohibited this lawsuit from being saved:</h2>
-          <ul>
-            <% @lawsuit.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
+
+    <div class="field">
+      <label>Partes Interessadas</label>
+      <div class="two fields">
+        <div class="field">
+          <div id="actives">
+            <% if local_assigns[:new_action] %>
+            <%= f.collection_select :active_ids, Contact.all, :id, :fullname, {include_hidden: false}, {multiple: true, class:"selectize-generic", placeholder: "Ativos"} %>
             <% end %>
-          </ul>
+            <% if local_assigns[:edit_action] %>
+            <%= f.fields_for :actives do |active_fields| %>
+            <%= render partial: "active_fields", locals: { f: active_fields } %>
+            <% end %>
+            <% end %>
+          </div>
+          <% if local_assigns[:edit_action] %>
+          <div class="field">
+            <%= link_to_add_association f, :actives, class:"ui right labeled icon button" do %>
+            Adicionar Ativo
+            <i class="right plus icon"></i>
+            <% end %>
+          </div>
+          <% end %>
         </div>
-      <% end %>
-      <div class="actions">
-        <%= f.submit %>
+        <div class="field">
+          <div id="recievers">
+            <% if local_assigns[:new_action] %>
+            <%= f.collection_select :reciever_ids, Contact.all, :id, :fullname, {include_hidden: false}, {multiple: true, class:"selectize-generic", placeholder: "Passivos"} %>
+            <% end %>
+            <% if local_assigns[:edit_action] %>
+            <%= f.fields_for :recievers do |reciever_fields| %>
+            <%= render partial: "reciever_fields", locals: { f: reciever_fields } %>
+            <% end %>
+            <% end %>
+            <% if local_assigns[:edit_action] %>
+            <div class="field">
+              <%= link_to_add_association f, :recievers, class:"ui right labeled icon button" do %>
+              Adicionar Passivo
+              <i class="right plus icon"></i>
+              <% end %>
+            </div>
+            <% end %>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+  <div class="centered padded grid">
+    <% if @lawsuit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lawsuit.errors.count, "error") %> prohibited this lawsuit from being saved:</h2>
+      <ul>
+        <% @lawsuit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
     <% end %>
   </div>
   <%= render partial: "forumModal" %>
   <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
       var selectizeCallback = null;
-    
+
       $('.ui.modal.forum-modal')
-      .modal({
-        onHidden: function(e){
-          if (selectizeCallback != null){
-            selectizeCallback();
-            selectizeCallback = null;
+        .modal({
+          onHidden: function (e) {
+            if (selectizeCallback != null) {
+              selectizeCallback();
+              selectizeCallback = null;
+            }
+
+            $("#new_forum").trigger("reset");
+            $.rails.enableFormElements($("#new_forum"));
           }
-    
-          $("#new_forum").trigger("reset");
-          $.rails.enableFormElements($("#new_forum"));
-        }
-      });
-    
-      $("#new_forum").on("submit", function(e){
+        });
+
+      $("#new_forum").on("submit", function (e) {
         e.preventDefault();
         $.ajax({
           dataType: "json",
           method: "POST",
           url: $(this).attr("action"),
           data: $(this).serialize(),
-          success: function(response) {
+          success: function (response) {
             console.log(response)
-            selectizeCallback({value: response.forum.id, text: response.forum.name});
+            selectizeCallback({ value: response.forum.id, text: response.forum.name });
             selectizeCallback = null;
-    
+
             $(".ui.modal.forum-modal").modal('toggle');
           }
         })
       });
-    
+
       $(".selectize-forum").selectize({
-        create: function(input, callback){
+        create: function (input, callback) {
           selectizeCallback = callback;
-    
+
           $(".ui.modal.forum-modal").modal('show');
           $("#forum_name").val(input);
         }
       });
-    
+
       $(".selectize-generic").selectize();
-    
+
     });
+
+    $(document).on('cocoon:after-insert', function (e, insertedItem, originalEvent) {
+      $(insertedItem).find('.selectize-generic').selectize({
+        sortField: 'text'
+      })
+    });
+
+    $('#conciliation-date').calendar({
+      type: 'date',
+      monthFirst: false,
+      text: {
+        days: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+        months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        today: 'Today',
+        now: 'Now',
+        am: 'AM',
+        pm: 'PM'
+      },
+    });
+
+    $('#instruction-date').calendar({
+      type: 'date',
+      monthFirst: false,
+      text: {
+        days: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+        months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        today: 'Today',
+        now: 'Now',
+        am: 'AM',
+        pm: 'PM'
+      },
+    });
+
+    $('#interrogation-date').calendar({
+      type: 'date',
+      monthFirst: false,
+      text: {
+        days: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+        months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        today: 'Today',
+        now: 'Now',
+        am: 'AM',
+        pm: 'PM'
+      },
+    });
+
   </script>

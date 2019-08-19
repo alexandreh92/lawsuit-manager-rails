@@ -56,10 +56,11 @@ ActiveRecord::Schema.define(version: 20190814235738) do
     t.integer  "lawyer_id"
     t.decimal  "fees"
     t.string   "autos"
-    t.string   "conciliation_date"
-    t.string   "instruction_date"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "conciliation_date"
+    t.datetime "instruction_date"
+    t.datetime "interrogation_date"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_index "lawsuits", ["forum_id"], name: "index_lawsuits_on_forum_id"

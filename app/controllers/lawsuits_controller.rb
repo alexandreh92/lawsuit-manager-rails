@@ -26,8 +26,6 @@ class LawsuitsController < ApplicationController
 
   # GET /lawsuits/1/edit
   def edit
-    @contacts = {}
-    Contact.all.collect { |c| @contacts[c.name] = c.id }
   end
 
   # POST /lawsuits
@@ -51,10 +49,11 @@ class LawsuitsController < ApplicationController
   # PATCH/PUT /lawsuits/1
   # PATCH/PUT /lawsuits/1.json
   def update
+    @lawsuit.recievers.clear
     respond_to do |format|
       if @lawsuit.update(lawsuit_params)
-        @lawsuit.actives.where.not(contact_id: active_ids).destroy_all
-        @lawsuit.actives << Active.where(id: active_ids)
+        @lawsuit.actives.clear
+        handle_edit_actives
         format.html { redirect_to @lawsuit, notice: 'Lawsuit was successfully updated.' }
         format.json { render :show, status: :ok, location: @lawsuit }
       else
@@ -86,21 +85,29 @@ class LawsuitsController < ApplicationController
     params[:lawsuit][:active_ids]
   end
 
+  def active_ids_for_edit
+    params[:lawsuit][:actives_attributes]
+  end
+
   def handle_actives
     # use this to nested attributes (fields_for)
     # params[:lawsuit][:actives_attributes].try(:[], '0').try(:[], :contact_id)
-    if params[:lawsuit][:active_ids]
-      params[:lawsuit][:active_ids].each do |a|
-        @lawsuit.actives << Active.new(contact_id: a, lawsuit_id: @lawsuit[:id])
+    params[:lawsuit][:active_ids]&.each do |a|
+      @lawsuit.actives << Active.new(contact_id: a, lawsuit_id: @lawsuit[:id])
+    end
+  end
+
+  def handle_edit_actives
+    active_ids_for_edit&.each do |_k, v|
+      if v[:contact_id] != "" and v[:_destroy] == "false"
+        @lawsuit.actives << Active.new(contact_id: v[:contact_id], lawsuit_id: @lawsuit[:id])
       end
     end
   end
 
   def handle_recievers
-    if params[:lawsuit][:reciever_ids]
-      params[:lawsuit][:reciever_ids].each do |a|
-        @lawsuit.recievers << Reciever.new(contact_id: a, lawsuit_id: @lawsuit[:id])
-      end
+    params[:lawsuit][:reciever_ids]&.each do |a|
+      @lawsuit.recievers << Reciever.new(contact_id: a, lawsuit_id: @lawsuit[:id])
     end
   end
 
@@ -112,6 +119,6 @@ class LawsuitsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def lawsuit_params
     params.require(:lawsuit).permit(:forum_id, :lawyer_id, :fees, :autos, :conciliation_date,
-                                    :instruction_date)
+                                    :instruction_date, :interrogation_date, recievers_attributes:[:contact_id, :_destroy])
   end
 end

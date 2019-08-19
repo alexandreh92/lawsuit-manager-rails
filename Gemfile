@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
 
+# Simple Calendar is designed to do one thing really really well: render a calendar.
+gem "simple_calendar", "~> 2.0"
+# This is a simple datepicker for Semantic-UI.
+gem 'semantic-datepicker-rails', github: 'jonatandahora/semantic-datepicker-rails'
+# Backport left_joins from Rails 5 for Rails 3 and 4.
+gem 'left_joins'
 # Rails forms made easy.
 gem 'simple_form'
 # This gem does some CPF/CNPJ magic. It allows you to create, validate and format CPF/CNPJ, even through the command-line
@@ -55,6 +61,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry'
+  gem 'better_errors'
 end
 
 group :development do

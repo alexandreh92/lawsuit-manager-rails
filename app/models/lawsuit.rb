@@ -8,6 +8,15 @@ class Lawsuit < ActiveRecord::Base
   has_many :recievers
   has_many :contacts, through: :recievers
 
-  accepts_nested_attributes_for :actives, allow_destroy: true
+  #Validations
+  validates :autos, :lawyer, :fees, :forum, presence: true
+
+  accepts_nested_attributes_for :actives, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :recievers, reject_if: :all_blank, allow_destroy: true
+
+  def start_time
+    self.conciliation_date
+  end
+
 
 end
