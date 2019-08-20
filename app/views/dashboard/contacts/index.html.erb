@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 <div class="ui top attached testef block header clearing segment">
 <label>Lista de Contatos</label>
-<%= link_to  "Novo Contato", new_contact_path, class:"ui right floated button pastel" %>
+<%= link_to  "Novo Contato", new_dashboard_contact_path, class:"ui right floated button pastel" %>
 </div>
 <div class="ui bottom attached segment">
-  <table id="contacts-datatable" class="ui celled striped table dataTable" data-source="<%= contacts_path(format: :json) %>">
+  <table id="contacts-datatable" class="ui celled striped table dataTable" data-source="<%= dashboard_contacts_path(format: :json) %>">
     <thead>
       <tr>
         <th>ID</th>

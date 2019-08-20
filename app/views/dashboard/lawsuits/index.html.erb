@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 <div class="ui top attached testef block header clearing segment">
   <label>Lista de Açoes</label>
-  <%= link_to  "Nova Ação", new_lawsuit_path, class:"ui right floated button pastel" %>
+  <%= link_to  "Nova Ação", new_dashboard_lawsuit_path, class:"ui right floated button pastel" %>
   </div>
 <div class="ui bottom attached segment">
-<table id="lawsuits-datatable" class="ui celled striped table dataTable" data-source="<%= lawsuits_path(format: :json) %>">
+<table id="lawsuits-datatable" class="ui celled striped table dataTable" data-source="<%= dashboard_lawsuits_path(format: :json) %>">
   <thead>
     <tr>
       <th>Autos</th>

@@ -17,7 +17,7 @@
         <td><%= phone.number %></td>
         <td><%= phone.contact %></td>
         <td><%= link_to 'Show', phone %></td>
-        <td><%= link_to 'Edit', edit_phone_path(phone) %></td>
+        <td><%= link_to 'Edit', edit_dashboard_phone_path(phone) %></td>
         <td><%= link_to 'Destroy', phone, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Phone', new_phone_path %>
+<%= link_to 'New Phone', new_dashboard_phone_path %>

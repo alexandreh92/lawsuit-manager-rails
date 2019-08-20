@@ -4,19 +4,23 @@ Rails.application.routes.draw do
 
   
 
+  namespace :dashboard do
+  get 'home/index'
   resources :contacts
+  resources :lawsuits
+  resources :phones
+  end
+
+  get 'dashboard', to: 'dashboard/home#index'
   resources :forums
   resources :lawyers
-  resources :lawsuits
   resources :professions
   resources :marital_statuses
-  resources :phones
-
   namespace :site do
     get 'home/index'
   end
 
-  root 'site/home#index'
+  root 'dashboard/home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

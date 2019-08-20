@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Teste</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+    <div class="ui sidebar vertical left menu overlay inverted visible">
+        <div class="item logo">
+          <img src="https://image.flaticon.com/icons/svg/866/866218.svg" /><img
+            src="https://image.flaticon.com/icons/svg/866/866218.svg" style="display: none" />
+        </div>
+        <%= link_to  "Dashboard", dashboard_path, class:"item" %>
+        <%= link_to  "Contacts", dashboard_contacts_path, class:"item" %>
+        <%= link_to  "Lawsuits", dashboard_lawsuits_path, class:"item" %>
+      </div>
+    
+      <div class="pusher">
+        <div class="ui menu asd borderless"
+          style="border-radius: 0!important; border: 0; margin-left: 260px;">
+          <div class="right menu">
+            <div class="ui dropdown item">
+              User <i class="dropdown icon"></i>
+              <div class="menu">
+                <a class="item">Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-left: 260px">
+          <div class="ui container">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+
+</body>
+
+</html>

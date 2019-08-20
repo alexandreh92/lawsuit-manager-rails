@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ContactsController < ApplicationController
+class Dashboard::ContactsController < DashboardController
   before_action :set_contact, only: %i[show edit update destroy]
   before_action :set_options_for_select, only: %i[new edit update create]
 
@@ -35,11 +35,11 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
-        format.json { render @contact }
+        format.html { redirect_to [:dashboard, @contact], notice: 'Contact was successfully created.' }
+        format.json { render [:dashboard, @contact] }
       else
         format.html { render :new }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        format.json { render json: [:dashboard, @contact.errors], status: :unprocessable_entity }
       end
     end
   end
@@ -49,11 +49,11 @@ class ContactsController < ApplicationController
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contact }
+        format.html { redirect_to [:dashboard, @contact], notice: 'Contact was successfully updated.' }
+        format.json { render :show, status: :ok, location: [:dashboard, @contact] }
       else
         format.html { render :edit }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        format.json { render json: [:dashboard, @contact.errors], status: :unprocessable_entity }
       end
     end
   end
@@ -83,6 +83,6 @@ class ContactsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def contact_params
     params.require(:contact).permit(:name, :lastname, :cpf, :rg, :birthdate, :profession_id, :marital_status_id, :address,
-                                    :zipcode, :city, :state, :district, :number)
+                                    :zipcode, :city, :state, :district, phones_attributes: [:number])
   end
 end

@@ -17,4 +17,3 @@
 //= require selectize
 //= require semantic-datepicker
 //= require_tree .
-(".selectize").selectize();

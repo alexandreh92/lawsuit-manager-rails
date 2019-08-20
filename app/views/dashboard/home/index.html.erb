@@ -59,7 +59,7 @@
           <% lawsuits.each do |lawsuit| %>
 
               
-              <%= link_to (lawsuit), :class => 'ui label calendar' do %>
+              <%= link_to (dashboard_lawsuit_path(lawsuit.id)), :class => 'ui label calendar' do %>
               
                 <%= lawsuit.autos %>
               <% end %>

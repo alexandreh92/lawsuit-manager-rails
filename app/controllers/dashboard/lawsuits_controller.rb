@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LawsuitsController < ApplicationController
+class Dashboard::LawsuitsController < DashboardController
   before_action :set_lawsuit, only: %i[show edit update destroy]
   before_action :set_options_for_select
 
@@ -37,7 +37,7 @@ class LawsuitsController < ApplicationController
       if @lawsuit.save
         handle_actives
         handle_recievers
-        format.html { redirect_to @lawsuit, notice: 'Lawsuit was successfully created.' }
+        format.html { redirect_to [:dashboard, @lawsuit], notice: 'Lawsuit was successfully created.' }
         format.json { render :show, status: :created, location: @lawsuit }
       else
         format.html { render :new }
@@ -54,7 +54,7 @@ class LawsuitsController < ApplicationController
       if @lawsuit.update(lawsuit_params)
         @lawsuit.actives.clear
         handle_edit_actives
-        format.html { redirect_to @lawsuit, notice: 'Lawsuit was successfully updated.' }
+        format.html { redirect_to [:dashboard, @lawsuit], notice: 'Lawsuit was successfully updated.' }
         format.json { render :show, status: :ok, location: @lawsuit }
       else
         format.html { render :edit }
