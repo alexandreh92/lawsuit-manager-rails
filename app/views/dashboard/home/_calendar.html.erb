@@ -1,0 +1,12 @@
+<%= month_calendar events: @lawsuits do |date, lawsuits| %>
+  <div>
+    <b><%= I18n.l(date) %></b>
+  </div>
+  <% lawsuits.each do |lawsuit| %>
+    <div>
+      <%= link_to (dashboard_lawsuit_path(lawsuit.id)), :class => 'ui label calendar' do %>
+        <%= lawsuit.autos %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

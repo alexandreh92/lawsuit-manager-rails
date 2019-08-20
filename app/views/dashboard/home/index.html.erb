@@ -54,18 +54,9 @@
         <h4>Calendário</h4>
       </div>
       <div class="ui segment">
-        <%= month_calendar events: @lawsuits do |date, lawsuits| %>
-          <b><%= I18n.l(date) %></b>
-          <% lawsuits.each do |lawsuit| %>
-
-              
-              <%= link_to (dashboard_lawsuit_path(lawsuit.id)), :class => 'ui label calendar' do %>
-              
-                <%= lawsuit.autos %>
-              <% end %>
-
-          <% end %>
-        <% end %>
+        <div id="events_calendar">
+          <%= render partial: 'calendar', locals: {events: @lawsuits}%>
+        </div>
       </div>
       <div class="ui segment">
       </div>

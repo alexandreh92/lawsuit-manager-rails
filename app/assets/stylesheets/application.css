@@ -86,3 +86,16 @@
 .ui.black.label{
   margin-top: -10px !important;
 }
+
+.ui.container{
+  width: 90%
+}
+
+.ui.red.segment:not(.inverted){
+  border-top: 0px !important;
+  border-left: 2px solid #DB2828 !important;
+}
+
+.ui.container.main{
+  padding-top: 35px;
+}
