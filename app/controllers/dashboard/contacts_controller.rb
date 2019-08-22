@@ -7,7 +7,7 @@ class Dashboard::ContactsController < DashboardController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = Dashboard::Contact.all
     respond_to do |format|
       format.html
       format.json { render json: ContactDatatable.new(params) }
@@ -20,7 +20,7 @@ class Dashboard::ContactsController < DashboardController
 
   # GET /contacts/new
   def new
-    @contact = Contact.new
+    @contact = Dashboard::Contact.new
     @contact.phones.build
     
   end
@@ -31,15 +31,15 @@ class Dashboard::ContactsController < DashboardController
   # POST /contacts
   # POST /contacts.json
   def create
-    @contact = Contact.new(contact_params)
+    @contact = Dashboard::Contact.new(contact_params)
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to [:dashboard, @contact], notice: 'Contact was successfully created.' }
-        format.json { render [:dashboard, @contact] }
+        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
+        format.json { render @contact }
       else
         format.html { render :new }
-        format.json { render json: [:dashboard, @contact.errors], status: :unprocessable_entity }
+        format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -49,11 +49,11 @@ class Dashboard::ContactsController < DashboardController
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to [:dashboard, @contact], notice: 'Contact was successfully updated.' }
-        format.json { render :show, status: :ok, location: [:dashboard, @contact] }
+        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
+        format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit }
-        format.json { render json: [:dashboard, @contact.errors], status: :unprocessable_entity }
+        format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -71,18 +71,18 @@ class Dashboard::ContactsController < DashboardController
   private
 
   def set_options_for_select
-    @profession_options_for_select = Profession.all.collect { |c| [c.description, c.id] }
-    @marital_options_for_select = MaritalStatus.all.collect { |m| [m.description, m.id] }
+    @profession_options_for_select = Dashboard::Profession.all.collect { |c| [c.description, c.id] }
+    @marital_options_for_select = Dashboard::MaritalStatus.all.collect { |m| [m.description, m.id] }
   end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_contact
-    @contact = Contact.find(params[:id])
+    @contact = Dashboard::Contact.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def contact_params
-    params.require(:contact).permit(:name, :lastname, :cpf, :rg, :birthdate, :profession_id, :marital_status_id, :address,
+    params.require(:dashboard_contact).permit(:name, :lastname, :cpf, :rg, :birthdate, :profession_id, :marital_status_id, :address,
                                     :zipcode, :city, :state, :district, phones_attributes: [:number])
   end
 end

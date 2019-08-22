@@ -4,13 +4,13 @@
     Nova Profissão
   </div>
   <div class="content">
-    <%= form_for Profession.new, html: {class: "ui form"} do |f| %>
-    <% if Profession.new.errors.any? %>
+    <%= form_for Dashboard::Profession.new, html: {class: "ui form"} do |f| %>
+    <% if Dashboard::Profession.new.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@profession.errors.count, "error") %> prohibited this profession from being saved:</h2>
 
       <ul>
-        <% Profession.new.errors.full_messages.each do |message| %>
+        <% Dashboard::Profession.new.errors.full_messages.each do |message| %>
         <li><%= message %></li>
         <% end %>
       </ul>
@@ -24,16 +24,15 @@
         </div>
       </div>
     </div>
-    <%= f.submit class: "ui button" %>
-    <% end %>
+    
   </div>
 
   <div class="actions">
-    
+    <%= f.submit class: "ui button" %>
     <div id="cancel" class="ui button">Cancelar</div>
     
   </div>
-  
+  <% end %>
 </div>
 
 <script>

@@ -4,7 +4,7 @@ class LawsuitDatatable < AjaxDatatablesRails::ActiveRecord
     # Declare strings in this format: ModelName.column_name
     # or in aliased_join_table.column_name format
     @view_columns ||= {
-        autos: { source: "Lawsuit.autos", cond: :like }
+        autos: { source: "Dashboard::Lawsuit.autos", cond: :like }
     }
   end
 
@@ -24,7 +24,7 @@ class LawsuitDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    Lawsuit.all.includes(:forum)
+    Dashboard::Lawsuit.all.includes(:forum)
   end
 
 end

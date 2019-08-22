@@ -1,0 +1,9 @@
+class CreateDashboardLawyers < ActiveRecord::Migration
+  def change
+    create_table :dashboard_lawyers do |t|
+      t.string :name
+
+      t.timestamps null: false
+    end
+  end
+end

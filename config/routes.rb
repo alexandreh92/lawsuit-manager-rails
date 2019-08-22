@@ -5,17 +5,24 @@ Rails.application.routes.draw do
   
 
   namespace :dashboard do
+    resources :dummies
+  end
+  namespace :dashboard do
   get 'home/index'
+  resources :marital_statuses
   resources :contacts
   resources :lawsuits
   resources :phones
-  end
-
-  get 'dashboard', to: 'dashboard/home#index'
   resources :forums
   resources :lawyers
   resources :professions
-  resources :marital_statuses
+  end
+
+  get 'dashboard', to: 'dashboard/home#index'
+  
+  
+  
+ 
   namespace :site do
     get 'home/index'
   end

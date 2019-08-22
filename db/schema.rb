@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190814235738) do
+ActiveRecord::Schema.define(version: 20190821151503) do
 
-  create_table "actives", force: :cascade do |t|
+  create_table "dashboard_actives", force: :cascade do |t|
     t.integer  "contact_id"
     t.integer  "lawsuit_id"
     t.datetime "appointment_date"
@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(version: 20190814235738) do
     t.datetime "updated_at"
   end
 
-  add_index "actives", ["contact_id"], name: "index_actives_on_contact_id"
-  add_index "actives", ["lawsuit_id"], name: "index_actives_on_lawsuit_id"
+  add_index "dashboard_actives", ["contact_id"], name: "index_dashboard_actives_on_contact_id"
+  add_index "dashboard_actives", ["lawsuit_id"], name: "index_dashboard_actives_on_lawsuit_id"
 
-  create_table "contacts", force: :cascade do |t|
+  create_table "dashboard_contacts", force: :cascade do |t|
     t.string   "name"
     t.string   "lastname"
     t.string   "cpf"
@@ -42,16 +42,22 @@ ActiveRecord::Schema.define(version: 20190814235738) do
     t.datetime "updated_at",        null: false
   end
 
-  add_index "contacts", ["marital_status_id"], name: "index_contacts_on_marital_status_id"
-  add_index "contacts", ["profession_id"], name: "index_contacts_on_profession_id"
+  add_index "dashboard_contacts", ["marital_status_id"], name: "index_dashboard_contacts_on_marital_status_id"
+  add_index "dashboard_contacts", ["profession_id"], name: "index_dashboard_contacts_on_profession_id"
 
-  create_table "forums", force: :cascade do |t|
+  create_table "dashboard_dummies", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "lawsuits", force: :cascade do |t|
+  create_table "dashboard_forums", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dashboard_lawsuits", force: :cascade do |t|
     t.integer  "forum_id"
     t.integer  "lawyer_id"
     t.decimal  "fees"
@@ -63,37 +69,37 @@ ActiveRecord::Schema.define(version: 20190814235738) do
     t.datetime "updated_at",         null: false
   end
 
-  add_index "lawsuits", ["forum_id"], name: "index_lawsuits_on_forum_id"
-  add_index "lawsuits", ["lawyer_id"], name: "index_lawsuits_on_lawyer_id"
+  add_index "dashboard_lawsuits", ["forum_id"], name: "index_dashboard_lawsuits_on_forum_id"
+  add_index "dashboard_lawsuits", ["lawyer_id"], name: "index_dashboard_lawsuits_on_lawyer_id"
 
-  create_table "lawyers", force: :cascade do |t|
+  create_table "dashboard_lawyers", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "marital_statuses", force: :cascade do |t|
+  create_table "dashboard_marital_statuses", force: :cascade do |t|
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  create_table "phones", force: :cascade do |t|
+  create_table "dashboard_phones", force: :cascade do |t|
     t.string   "number"
     t.integer  "contact_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "phones", ["contact_id"], name: "index_phones_on_contact_id"
+  add_index "dashboard_phones", ["contact_id"], name: "index_dashboard_phones_on_contact_id"
 
-  create_table "professions", force: :cascade do |t|
+  create_table "dashboard_professions", force: :cascade do |t|
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  create_table "recievers", force: :cascade do |t|
+  create_table "dashboard_recievers", force: :cascade do |t|
     t.integer  "contact_id"
     t.integer  "lawsuit_id"
     t.datetime "appointment_date"
@@ -101,7 +107,7 @@ ActiveRecord::Schema.define(version: 20190814235738) do
     t.datetime "updated_at"
   end
 
-  add_index "recievers", ["contact_id"], name: "index_recievers_on_contact_id"
-  add_index "recievers", ["lawsuit_id"], name: "index_recievers_on_lawsuit_id"
+  add_index "dashboard_recievers", ["contact_id"], name: "index_dashboard_recievers_on_contact_id"
+  add_index "dashboard_recievers", ["lawsuit_id"], name: "index_dashboard_recievers_on_lawsuit_id"
 
 end

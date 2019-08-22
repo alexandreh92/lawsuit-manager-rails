@@ -4,8 +4,8 @@
       Nova Vara
     </div>
     <div class="content">
-      <%= form_for Forum.new, html: {class: "ui form"} do |f| %>
-      <% if Forum.new.errors.any? %>
+      <%= form_for Dashboard::Forum.new, html: {class: "ui form"} do |f| %>
+      <% if Dashboard::Forum.new.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@forum.errors.count, "error") %> prohibited this forum from being saved:</h2>
   

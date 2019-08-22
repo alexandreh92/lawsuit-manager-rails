@@ -1,5 +1,5 @@
 <div class="ui container">
-  <%= form_for [:dashboard, @lawsuit], html: {class: "ui form"} do |f| %>
+  <%= form_for @lawsuit, html: {class: "ui form"} do |f| %>
   <div class="field">
     <label>Informações</label>
     <div class="four fields">
@@ -55,7 +55,7 @@
         <div class="field">
           <div id="actives">
             <% if local_assigns[:new_action] %>
-            <%= f.collection_select :active_ids, Contact.all, :id, :fullname, {include_hidden: false}, {multiple: true, class:"selectize-generic", placeholder: "Ativos"} %>
+            <%= f.collection_select :active_ids, Dashboard::Contact.all, :id, :fullname, {include_hidden: false}, {multiple: true, class:"selectize-generic", placeholder: "Ativos"} %>
             <% end %>
             <% if local_assigns[:edit_action] %>
             <%= f.fields_for :actives do |active_fields| %>
@@ -75,7 +75,7 @@
         <div class="field">
           <div id="recievers">
             <% if local_assigns[:new_action] %>
-            <%= f.collection_select :reciever_ids, Contact.all, :id, :fullname, {include_hidden: false}, {multiple: true, class:"selectize-generic", placeholder: "Passivos"} %>
+            <%= f.collection_select :reciever_ids, Dashboard::Contact.all, :id, :fullname, {include_hidden: false}, {multiple: true, class:"selectize-generic", placeholder: "Passivos"} %>
             <% end %>
             <% if local_assigns[:edit_action] %>
             <%= f.fields_for :recievers do |reciever_fields| %>
@@ -124,12 +124,12 @@
               selectizeCallback = null;
             }
 
-            $("#new_forum").trigger("reset");
-            $.rails.enableFormElements($("#new_forum"));
+            $("#new_dashboard_forum").trigger("reset");
+            $.rails.enableFormElements($("#new_dashboard_forum"));
           }
         });
 
-      $("#new_forum").on("submit", function (e) {
+      $("#new_dashboard_forum").on("submit", function (e) {
         e.preventDefault();
         $.ajax({
           dataType: "json",
@@ -137,8 +137,8 @@
           url: $(this).attr("action"),
           data: $(this).serialize(),
           success: function (response) {
-            console.log(response)
-            selectizeCallback({ value: response.forum.id, text: response.forum.name });
+            console.log(response);
+            selectizeCallback({ value: response.id, text: response.name });
             selectizeCallback = null;
 
             $(".ui.modal.forum-modal").modal('toggle');
@@ -149,9 +149,8 @@
       $(".selectize-forum").selectize({
         create: function (input, callback) {
           selectizeCallback = callback;
-
           $(".ui.modal.forum-modal").modal('show');
-          $("#forum_name").val(input);
+          $("#dashboard_forum_name").val(input);
         }
       });
 

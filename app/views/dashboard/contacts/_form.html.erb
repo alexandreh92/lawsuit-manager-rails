@@ -1,5 +1,5 @@
 <div class="ui container">
-    <%= form_for [:dashboard, @contact], html: {class: "ui form"} do |f| %>
+    <%= form_for @contact, html: {class: "ui form"} do |f| %>
     
     <% if @contact.errors.any? %>
     <div class="ui message">
@@ -103,13 +103,13 @@
       $(document).ready(function () {
     
         function clear_form() {
-          $("#contact_address").val("");
-          $("#contact_district").val("");
-          $("#contact_city").val("");
-          $("#contact_state").val("");
+          $("#dashboard_contact_address").val("");
+          $("#dashboard_contact_district").val("");
+          $("#dashboard_contact_city").val("");
+          $("#dashboard_contact_state").val("");
         }
     
-        $("#contact_zipcode").blur(function () {
+        $("#dashboard_contact_zipcode").blur(function () {
     
           var cep = $(this).val().replace(/\D/g, '');
     
@@ -119,18 +119,18 @@
     
             if (validacep.test(cep)) {
     
-              $("#contact_address").val("...");
-              $("#contact_district").val("...");
-              $("#contact_city").val("...");
-              $("#contact_state").val("...");
+              $("#dashboard_contact_address").val("...");
+              $("#dashboard_contact_district").val("...");
+              $("#dashboard_contact_city").val("...");
+              $("#dashboard_contact_state").val("...");
     
               $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
     
                 if (!("erro" in dados)) {
-                  $("#contact_address").val(dados.logradouro);
-                  $("#contact_district").val(dados.bairro);
-                  $("#contact_city").val(dados.localidade);
-                  $("#contact_state").val(dados.uf);
+                  $("#dashboard_contact_address").val(dados.logradouro);
+                  $("#dashboard_contact_district").val(dados.bairro);
+                  $("#dashboard_contact_city").val(dados.localidade);
+                  $("#dashboard_contact_state").val(dados.uf);
                 }
                 else {
                   clear_form();
@@ -159,12 +159,12 @@
             selectizeCallback = null;
           }
     
-          $("#new_profession").trigger("reset");
-          $.rails.enableFormElements($("#new_profession"));
+          $("#new_dashboard_profession").trigger("reset");
+          $.rails.enableFormElements($("#new_dashboard_profession"));
         }
       });
     
-      $("#new_profession").on("submit", function(e){
+      $("#new_dashboard_profession").on("submit", function(e){
         e.preventDefault();
         $.ajax({
           method: "POST",
@@ -185,7 +185,7 @@
           selectizeCallback = callback;
     
           $(".ui.modal.profession-modal").modal('show');
-          $("#profession_description").val(input);
+          $("#dashboard_profession_description").val(input);
         }
       });
 

@@ -4,7 +4,7 @@ class Dashboard::PhonesController < DashboardController
   # GET /phones
   # GET /phones.json
   def index
-    @phones = Phone.all
+    @phones = Dashboard::Phone.all
   end
 
   # GET /phones/1
@@ -14,7 +14,7 @@ class Dashboard::PhonesController < DashboardController
 
   # GET /phones/new
   def new
-    @phone = Phone.new
+    @phone = Dashboard::Phone.new
   end
 
   # GET /phones/1/edit
@@ -24,7 +24,7 @@ class Dashboard::PhonesController < DashboardController
   # POST /phones
   # POST /phones.json
   def create
-    @phone = Phone.new(phone_params)
+    @phone = Dashboard::Phone.new(phone_params)
 
     respond_to do |format|
       if @phone.save
@@ -64,11 +64,11 @@ class Dashboard::PhonesController < DashboardController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_phone
-      @phone = Phone.find(params[:id])
+      @phone = Dashboard::Phone.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def phone_params
-      params.require(:phone).permit(:number, :contact_id)
+      params.require(:dashboard_phone).permit(:number, :contact_id)
     end
 end

@@ -5,8 +5,8 @@ class ContactDatatable < AjaxDatatablesRails::ActiveRecord
     # Declare strings in this format: ModelName.column_name
     # or in aliased_join_table.column_name format
     @view_columns ||= {
-      id: { source: 'Contact.id', cond: :eq },
-      name: { source: 'Contact.name', cond: :like }
+      id: { source: 'Dashboard::Contact.id', cond: :eq },
+      name: { source: 'Dashboard::Contact.name', cond: :like }
     }
   end
 
@@ -27,7 +27,7 @@ class ContactDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    Contact.all
+    Dashboard::Contact.all
     # insert query here
     # User.all
   end
