@@ -23,10 +23,15 @@
         <div class="ui menu asd borderless"
           style="border-radius: 0!important; border: 0; margin-left: 260px;">
           <div class="right menu">
-            <div class="ui dropdown item">
-              User <i class="dropdown icon"></i>
+            <div class="ui dropdown link item">
+              <div class="text"><%= current_user.name %></div>
+              <i class="dropdown icon"></i>
               <div class="menu">
-                <a class="item">Logout</a>
+                <a class="item" href="#link1"><i class="user icon"></i>Perfil</a>
+                <div class="divider"></div>
+                <%= link_to destroy_user_session_path, method: :delete, class:"item" do %>
+                <i class="sign-out alternate icon"></i>Logoff
+                <% end %>
               </div>
             </div>
           </div>
@@ -39,5 +44,11 @@
       </div>
 
 </body>
-
+<script>
+  $('.right.menu .dropdown')
+  .dropdown({
+    action: 'hide'
+  })
+;
+</script>
 </html>

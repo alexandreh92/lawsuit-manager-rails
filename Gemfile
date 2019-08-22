@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+# Flexible authentication solution for Rails with Warden.
+gem 'devise'
 
 gem "nokogiri", ">= 1.10.4"
 # Simple Calendar is designed to do one thing really really well: render a calendar.
