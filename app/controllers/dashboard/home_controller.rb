@@ -1,5 +1,5 @@
 class Dashboard::HomeController < DashboardController
   def index
-    @lawsuits = Lawsuit.all
+    @lawsuits = Dashboard::Lawsuit.all
   end
 end

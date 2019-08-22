@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+
+
+gem "nokogiri", ">= 1.10.4"
 # Simple Calendar is designed to do one thing really really well: render a calendar.
 gem "simple_calendar", "~> 2.0"
 # This is a simple datepicker for Semantic-UI.
