@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     get 'home/index'
   end
 
-  root 'dashboard/home#index'
+  root 'site/home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

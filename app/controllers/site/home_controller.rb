@@ -1,5 +1,6 @@
 class Site::HomeController < ApplicationController
+  layout 'site'
   def index
-    @lawsuits = Lawsuit.all
+    
   end
 end

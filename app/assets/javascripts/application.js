@@ -12,8 +12,4 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require cocoon
 //= require semantic-ui
-//= require selectize
-//= require semantic-datepicker
-//= require_tree .

@@ -8,4 +8,9 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w( dashboard/dashboard.css )
+Rails.application.config.assets.precompile += %w( dashboard/devise.css )
+Rails.application.config.assets.precompile += %w( site/site.css )
+Rails.application.config.assets.precompile += %w( dashboard/dashboard.js )
+Rails.application.config.assets.precompile += %w( dashboard/devise.js )
+Rails.application.config.assets.precompile += %w( site/site.js )

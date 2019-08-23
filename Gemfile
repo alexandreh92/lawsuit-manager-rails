@@ -2,7 +2,11 @@ source 'https://rubygems.org'
 
 # Flexible authentication solution for Rails with Warden.
 gem 'devise'
-
+# Translations for the devise gem
+gem 'devise-i18n'
+# The most popular front-end framework for developing responsive, mobile first projects on the web.
+gem 'rails-assets-bootstrap', '3.3.7', source: 'https://rails-assets.org'
+gem 'font-awesome-rails'
 gem "nokogiri", ">= 1.10.4"
 # Simple Calendar is designed to do one thing really really well: render a calendar.
 gem "simple_calendar", "~> 2.0"

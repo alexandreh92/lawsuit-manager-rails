@@ -1,20 +1,51 @@
-<h2>Log in</h2>
+<body class="bg-gradient-white">
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-<div class="form-inputs">
-  <%= f.input :email,
-                required: true,
-                autofocus: true
-                 %>
-  <%= f.input :password,
-                required: true
-                 %>
-  <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-</div>
+  <div class="container">
 
-<div class="form-actions">
-  <%= f.button :submit, "Log in" %>
-</div>
-<% end %>
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
 
-<%= render "users/shared/links" %>
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                  </div>
+                  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: "user") do |f| %>
+                  <div class="form-group">
+                    <%= f.input :email, required: true, placeholder: "Enter Email Address...", label: false, input_html: { class: 'form-control form-control-user' } %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.input :password, required: true, placeholder: "Password", label: false, input_html: { class: 'form-control form-control-user' } %>
+                  </div>
+                  <div class="form-group">
+                    <% if devise_mapping.rememberable? %>
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me, "Remember Me", class: 'deviselabels' %>
+                    <% end %>
+                  </div>
+                  <%= f.button :submit, "Log in", class: "btn btn-primary btn-user btn-block" %>
+                  <% end %>
+                  <hr>
+                  <div class="text-center" style="padding-bottom: 50px">
+                    <a class="small" href="">Forgot Password?</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
