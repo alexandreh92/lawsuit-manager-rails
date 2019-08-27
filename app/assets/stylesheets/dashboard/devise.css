@@ -3,23 +3,31 @@
 *= require dashboard/sb-admin-2
 */
 
-.bg-login-image{
+.bg-login-image {
     background: url("/images/ccms.png");
-    background-position: center; 
+    background-position: center;
     background-size: 100%
 }
 
-.btn-ccms{
+.btn-ccms {
     color: #c2a674;
     font-weight: bold;
     background-color: #0f1011;
     border-color: #0f1011;
 }
 
-.text-black{
+.text-black {
     color: #0f1011;
 }
 
 .form-control:focus {
     box-shadow: 0 0 0 0.1rem #adadad;
+}
+
+.custom-control-label{
+    font-size: 16px;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: black;
 }

@@ -2,8 +2,6 @@
 
 Rails.application.routes.draw do
 
-  
-
   devise_for :users
   namespace :dashboard do
     resources :dummies
@@ -20,7 +18,11 @@ Rails.application.routes.draw do
   end
 
   get 'dashboard', to: 'dashboard/home#index'
-  
+  get 'home', to: 'site/home#index'
+  get 'history', to: 'site/history#index'
+  get 'services', to: 'site/services#index'
+  get 'contact', to: 'site/contact#index'
+
   
   
  

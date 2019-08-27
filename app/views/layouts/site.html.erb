@@ -4,12 +4,20 @@
 <head>
   <title>Teste</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag    'site/site', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'site/site' %>
   <%= csrf_meta_tags %>
 </head>
 
-<body>
-  <%= yield %>
+<body class="pushable">
+  <%= render partial: "site/shared/followingMenu" %>
+  <div class="pusher">
+    <div class="ui inverted vertical masthead center aligned segment">
+      <%= render partial: "site/shared/fixedMenu" %>
+      <%= yield %>
+      <%= render partial: "site/shared/footer" %>
+    </div>
 </body>
 
 </html>

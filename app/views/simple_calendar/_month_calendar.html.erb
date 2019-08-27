@@ -1,13 +1,12 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
   <div class="ui stackable pagination menu">
-    <%= link_to (calendar.url_for_previous_view), class: "paginate_button item previous" do %>
+    <%= link_to (calendar.url_for_previous_view), class: "paginate_button item previous", remote: true do %>
       <i class="angle left icon"></i>
       <%= t('simple_calendar.previous', default: 'Previous') %>
     <% end %>
     <a class="paginate_button item"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></a>
-    
-    <%= link_to (calendar.url_for_next_view), class: "paginate_button item next" do %>
+    <%= link_to (calendar.url_for_next_view), class: "paginate_button item next", remote: true do %>
       <%= t('simple_calendar.next', default: 'Next') %>
       <i class="angle right icon"></i>
     <% end %>

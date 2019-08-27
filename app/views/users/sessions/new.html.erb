@@ -15,6 +15,7 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
+                    
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
                   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: "user") do |f| %>
@@ -25,10 +26,12 @@
                     <%= f.input :password, required: true, placeholder: "Password", label: false, input_html: { class: 'form-control form-control-user' } %>
                   </div>
                   <div class="form-group">
-                    <% if devise_mapping.rememberable? %>
-                    <%= f.check_box :remember_me %>
-                    <%= f.label :remember_me, "Remember Me", class: 'deviselabels' %>
-                    <% end %>
+                    <div class="custom-control form-control-lg custom-checkbox">
+                      <% if devise_mapping.rememberable? %>
+                      <%= f.check_box :remember_me, class: "custom-control-input" %>
+                      <%= f.label :remember_me, "Remember Me", class: 'custom-control-label' %>
+                      <% end %>
+                    </div>
                   </div>
                   <%= f.button :submit, "Log in", class: "btn btn-ccms btn-user btn-block" %>
                   <% end %>
@@ -45,7 +48,20 @@
       </div>
 
     </div>
-
+    <div id="bb-growl-1" class="bb-alert alert alert-danger" style="display: none">
+        <span>Default alert</span>
+    </div>
   </div>
-
+  <script>
+      notify.show( 'dasdsadsa' )
+  </script>
+  <% flash.each do |key, value| %>
+  <script>
+      notify.init({
+        "selector": "#bb-growl-1"
+      });
+    
+      notify.show( '<%= value %>' )
+  </script>
+  <% end %>
 </body>
