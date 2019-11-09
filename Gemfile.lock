@@ -74,7 +74,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     cpf_cnpj (0.5.0)
-    crass (1.0.4)
+    crass (1.0.5)
     debug_inspector (0.0.3)
     devise (4.6.2)
       bcrypt (~> 3.0)
@@ -106,7 +106,7 @@ GEM
     json (1.8.6)
     left_joins (1.0.8)
       activerecord (>= 3)
-    loofah (2.2.3)
+    loofah (2.3.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -140,7 +140,6 @@ GEM
     rails-assets-bootstrap (3.3.7)
       rails-assets-jquery (>= 1.9.1, < 4)
     rails-assets-jquery (3.4.1)
-    rails-assets-notifyjs (0.4.2)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.9)
@@ -238,7 +237,6 @@ DEPENDENCIES
   pry
   rails (= 4.2.11.1)
   rails-assets-bootstrap (= 3.3.7)!
-  rails-assets-notifyjs!
   rails-erd
   rails-i18n (~> 4.0)
   sass-rails (~> 5.0)
